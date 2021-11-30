@@ -1,0 +1,42 @@
+experiment_name: null
+dataset_name: null
+dataset_root: null
+save_dir: 'results'
+mode: 'trainVal'
+filter_name: null
+
+# network parameters
+latent_size: 256
+vae: True
+dim: 3
+
+manifold_points: 300
+non_manifold_points: 2048
+sigma_multiplier: null
+pointcloud_noise: 0
+
+# optimization parameters
+batch_size: 32
+lr_start: 0.0005
+num_epochs: 100
+
+# loss parameters
+alpha_diff: 1
+alpha_same: 1
+alpha_box: 1
+alpha_code_regul: 0.0001
+
+device: 'cuda'
+log_mode: 'no_log' # 'interactive'
+logging: 'INFO'
+
+
+# mesh generation
+initial_voxel_size: 64
+upsampling_steps: 2
+generation_dir: "generation"
+
+init_with: null
+resume: false
+threads: 8
+save_every: null

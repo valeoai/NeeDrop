@@ -8,6 +8,44 @@ by: [Alexandre Boulch](https://www.boulch.eu), [Pierre-Alain Langlois](https://i
 
 [Project page](https://www.boulch.eu/2021_3dv_needrop) - Paper - Arxiv - Blog - [Code](https://github.com/valeoai/NeeDrop)
 
-## Abstract
+## Dependencies
 
-There has been recently a growing interest for implicit shape representations. Contrary to explicit representations, they have no resolution limitations and they easily deal with a wide variety of surface topologies. To learn these implicit representations, current approaches rely on a certain level of shape supervision (e.g., inside/outside information or distance-to-shape knowledge), or at least require a dense point cloud (to approximate well enough the distance-to-shape). In contrast, we introduce NeeDrop, an self-supervised method for learning shape representations from possibly extremely sparse point clouds. Like in Buffon’s needle problem, we “drop” (sample) needles on the point cloud and consider that, statistically, close to the surface, the needle end points lie on opposite sides of the surface. No shape knowledge is required and the point cloud can be highly sparse, e.g., as lidar point clouds acquired by vehicles. Previous self-supervised shape representation approaches fail to produce good-quality results on this kind of data. We obtain quantitative results on par with existing supervised approaches on shape reconstruction datasets and show promising qualitative results on hard autonomous driving datasets such as KITTI.
+
+### Installation of generation modules
+
+We use the generation code from [Occupancy Network](https://github.com/autonomousvision/convolutional_occupancy_networks). Please acknowledge the paper if you use this code.
+
+```
+python setup.py build_ext --inplace
+```
+
+## Datasets
+
+### ShapeNet ([Occupancy Network](https://github.com/autonomousvision/convolutional_occupancy_networks) pre-processing)
+
+We use the ShapeNet dataset as pre-processed by [Occupancy Networks](https://github.com/autonomousvision/convolutional_occupancy_networks). Please refer to original repositiry for downloading the data.
+
+## Training and evaluation
+
+### ShapeNet
+
+#### Training
+The following command trains the network with the default parameters. Here we assume the dataset is in a `data` folder. The outputs will be placed in a `results` folder.
+
+```
+python train.py --config configs/config_shapenet.yaml --log_mode interactive
+```
+
+#### Generation
+
+In order to generate the meshes, run the command
+
+```
+python generate.py --config replace/with/model/directory/config.yaml
+```
+
+If you want to generate a limited number of models per category:
+
+```
+python generate.py --config replace/with/model/directory/config.yaml --num_mesh 10
+```

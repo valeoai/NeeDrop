@@ -1,0 +1,7 @@
+dataset_name: "ShapeNet"
+dataset_root: 'data/ShapeNet'
+num_epochs: 1000
+manifold_points: 300
+non_manifold_points: 2048
+filter_name: null
+pointcloud_noise: 0.005
