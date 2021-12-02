@@ -8,6 +8,16 @@ by: [Alexandre Boulch](https://www.boulch.eu), [Pierre-Alain Langlois](https://i
 
 [Project page](https://www.boulch.eu/2021_3dv_needrop) - Paper - Arxiv - Blog - [Code](https://github.com/valeoai/NeeDrop)
 
+## Citation
+```
+@inproceedings{boulch2021needrop,
+  title={NeeDrop: Self-supervised Shape Representation from Sparse Point Clouds using Needle Dropping},
+  author={Boulch, Alexandre and Langlois, Pierre-Alain and Puy, Gilles and Marlet, Renaud},
+  booktitle={International Conference on 3D Vision (3DV)},
+  year={2021}
+}
+```
+
 ## Dependencies
 
 
