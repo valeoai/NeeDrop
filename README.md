@@ -82,5 +82,5 @@ python eval.py --dataset_name ShapeNet --dataset_root data/ShapeNet/ --predictio
 ### ShapeNet
 | Model | IoU |
 |---|---|
-| NeeDrop ShapeNet | 0.663 |
-| NeeDrop ShapeNet + Finetuning 0.5 | 0.676 |
+| [NeeDrop ShapeNet](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/ShapeNet_None_300_2048_filterNone.zip) | 0.663 |
+| [NeeDrop ShapeNet + Finetuning 0.5](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/ShapeNet_FT0.5_300_2048_filterNone.zip) | 0.676 |
