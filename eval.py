@@ -202,7 +202,7 @@ def chunks(lst, n):
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
 
-def process_function(data_id, dataset, results_dir):
+def process_function(data_id, dataset, results_dir, n_points=100000):
     
     # get the predicted mesh
     mesh_path = os.path.join(results_dir, "meshes", dataset.get_save_filename_mesh(data_id))
@@ -246,12 +246,13 @@ def main(config):
     ids = list(range(len(dataset)))
     for ch in tqdm(list(chunks(ids, config["threads"])), ncols=100):
         with Pool(config["threads"]) as p:
-            chunk_eval_dicts = p.map(partial(process_function, dataset=dataset, results_dir=results_dir), ch)
+            chunk_eval_dicts = p.map(partial(process_function, dataset=dataset, results_dir=results_dir, n_points=config["n_points"]), ch)
             eval_dicts += chunk_eval_dicts
 
     # define the output files
     out_file = os.path.join(results_dir, 'eval_meshes_full.pkl')
     out_file_class = os.path.join(results_dir, 'eval_meshes.csv')
+    out_file_quantile = os.path.join(results_dir, 'eval_meshes_quantile.csv')
 
     # Create pandas dataframe and save
     eval_df = pd.DataFrame(eval_dicts)
@@ -263,6 +264,9 @@ def main(config):
     eval_df_class.loc['mean'] = eval_df_class.mean()
     eval_df_class.to_csv(out_file_class)
     print(eval_df_class)
+
+    # quantiles
+    eval_df.quantile([0.05,0.5,0.95]).to_csv(out_file_quantile)
             
 
 if __name__ == "__main__":
@@ -275,6 +279,7 @@ if __name__ == "__main__":
     parser.add_argument('--prediction_dir', type=str, required=True)
     parser.add_argument('--num_mesh', type=int, default=None)
     parser.add_argument('--threads', type=int, default=8)
+    parser.add_argument('--n_points', type=int, default=100000)
     config = parser.parse(use_unknown=True)
 
     main(config)

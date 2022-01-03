@@ -36,7 +36,11 @@ python setup.py build_ext --inplace
 
 ### ShapeNet ([Occupancy Network](https://github.com/autonomousvision/convolutional_occupancy_networks) pre-processing)
 
-We use the ShapeNet dataset as pre-processed by [Occupancy Networks](https://github.com/autonomousvision/convolutional_occupancy_networks). Please refer to original repositiry for downloading the data.
+We use the ShapeNet dataset as pre-processed by [Occupancy Networks](https://github.com/autonomousvision/convolutional_occupancy_networks). Please refer to original repository for downloading the data.
+
+### DFaust
+
+Please download the data from the [official website](https://dfaust.is.tue.mpg.de/).
 
 ---
 ## Training
@@ -67,6 +71,13 @@ If you want to generate a limited number of models per category:
 python generate.py --config replace/with/model/directory/config.yaml --num_mesh 10
 ```
 
+*Note*: evaluation on DFaust (as in [SAL](https://github.com/matanatz/SAL)) was done with 30000 points to compute the Chamfer distance.
+
+```
+python eval.py --dataset_name DFaust --dataset_root data/DFaust/ --prediction_dir results/DFaust_None_300_2048_filterNone/generation/ --n_points 30000
+```
+
+
 ---
 ## Evaluation
 
@@ -79,8 +90,16 @@ python eval.py --dataset_name ShapeNet --dataset_root data/ShapeNet/ --predictio
 ---
 ## Pretrained models
 
+*Note*: the proposed pre-trained networks where re-trained, which explains the slight diffrerence with respect to the paper.
+
 ### ShapeNet
 | Model | IoU |
 |---|---|
 | [NeeDrop ShapeNet](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/ShapeNet_None_300_2048_filterNone.zip) | 0.663 |
 | [NeeDrop ShapeNet + Finetuning 0.5](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/ShapeNet_FT0.5_300_2048_filterNone.zip) | 0.676 |
+
+### DFaust
+| Model | Chamfer 5% | Chamfer 50% | Chamfer 95% |
+|---|---|---|---|
+| NeeDrop DFaust | 0.233 * 1e-3 | 0.425  * 1e-3 | 2.265  * 1e-3 |
+
