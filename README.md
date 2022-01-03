@@ -101,5 +101,5 @@ python eval.py --dataset_name ShapeNet --dataset_root data/ShapeNet/ --predictio
 ### DFaust
 | Model | Chamfer 5% | Chamfer 50% | Chamfer 95% |
 |---|---|---|---|
-| NeeDrop DFaust | 0.233 * 1e-3 | 0.425  * 1e-3 | 2.265  * 1e-3 |
+| [NeeDrop DFaust](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/DFaust_None_300_2048_filterNone.zip) | 0.233 * 1e-3 | 0.425  * 1e-3 | 2.265  * 1e-3 |
 
