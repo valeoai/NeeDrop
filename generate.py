@@ -82,8 +82,15 @@ def main(config):
 
             os.makedirs(os.path.dirname(mesh_path), exist_ok=True)
             os.makedirs(os.path.dirname(pts_path), exist_ok=True)
+
+            manifold_points = data['manifold_points'][0].cpu().numpy()
+
+            if hasattr(dataset, "unnormalizing_parameters") and callable(dataset.unnormalizing_parameters):
+                mesh_pred.vertices = dataset.unnormalizing_parameters(mesh_pred.vertices)
+                manifold_points = dataset.unnormalizing_parameters(manifold_points)
+
             mesh_pred.export(mesh_path)
-            np.savetxt(pts_path, data['manifold_points'][0].cpu().numpy())
+            np.savetxt(pts_path, manifold_points)
             
         
 if __name__ == "__main__":

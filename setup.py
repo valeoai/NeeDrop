@@ -24,12 +24,13 @@ mcubes_module = Extension(
     include_dirs=[numpy_include_dir]
 )
 
-riangle_hash_module = Extension(
+triangle_hash_module = Extension(
     'utils.libmesh.triangle_hash',
     sources=[
         'utils/libmesh/triangle_hash.pyx'
     ],
-    libraries=['m']  # Unix-like specific
+    libraries=['m'],  # Unix-like specific
+    include_dirs=[numpy_include_dir]
 )
 
 # mise (efficient mesh extraction)
@@ -55,6 +56,7 @@ ext_modules = [
     mcubes_module,
     mise_module,
     simplify_mesh_module,
+    triangle_hash_module,
 ]
 
 setup(

@@ -4,9 +4,9 @@ from .triangle_hash import TriangleHash as _TriangleHash
 
 def check_mesh_contains(mesh, points, hash_resolution=512):
     intersector = MeshIntersector(mesh, hash_resolution)
-    contains , hole_points= intersector.query(points)
-    return contains,  hole_points
-
+    # contains , hole_points= intersector.query(points)
+    contains = intersector.query(points)
+    return contains #,  hole_points
 
 class MeshIntersector:
     def __init__(self, mesh, resolution=512):
@@ -68,11 +68,11 @@ class MeshIntersector:
         # Check if point contained in mesh
         contains1 = (np.mod(nintersect0, 2) == 1)
         contains2 = (np.mod(nintersect1, 2) == 1)
-        if (contains1 != contains2).any():
-            print('Warning: contains1 != contains2 for some points.')
+        # if (contains1 != contains2).any():
+        #     print('Warning: contains1 != contains2 for some points.')
         contains[mask] = (contains1 & contains2)
-        hole_points[mask] = np.logical_xor( contains1 , contains2)
-        return contains,  hole_points
+        #hole_points[mask] = np.logical_xor( contains1 , contains2)
+        return contains #,  hole_points
 
     def compute_intersection_depth(self, points, triangles):
         t1 = triangles[:, 0, :]

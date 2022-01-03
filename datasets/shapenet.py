@@ -178,8 +178,6 @@ class Dataset:
         path = path + ".xyz"
         return path
 
-
-
     def get_manifold_points(self, index, num_manifold_points):
         filename = self.filenames[index]
         if self.points_shape is None:
@@ -193,7 +191,6 @@ class Dataset:
             # pts_shp = pts_shp[torch.randperm(pts_shp.shape[0])[:num_manifold_points]]
             pts_shp = pts_shp[(torch.rand(num_manifold_points)*pts_shp.shape[0]).long()]
         return pts_shp
-
 
     def get_non_manifold_points(self, index, num_non_manifold_points, manifold_points):
 
@@ -226,7 +223,6 @@ class Dataset:
         occupancies = torch.tensor(occupancies, dtype=torch.long)
         
         return non_manifold_points, occupancies
-
 
     def __getitem__(self, index):
 
@@ -269,3 +265,34 @@ class Dataset:
         }
 
         return return_dict
+
+
+    def get_evaluation_material(self, index):
+
+        filename = self.filenames[index]
+        pointcloud = np.load(os.path.join(filename, "pointcloud.npz"))
+        points = np.load(os.path.join(filename, "points.npz"))
+        
+        pointcloud_gt = pointcloud["points"]
+        normals_gt = pointcloud["normals"]
+        points_gt = points["points"]
+        occupancies = np.unpackbits(points['occupancies'])[:points_gt.shape[0]].astype(np.float32)
+
+        eval_material = {}
+        eval_material["mesh_gt"] = None
+        eval_material["pointcloud_gt"] = pointcloud_gt
+        eval_material["normals_gt"] = normals_gt
+        eval_material["points_iou"] = points_gt
+        eval_material["occ_gt"] = occupancies
+
+        return eval_material
+
+
+    def get_category(self, f_id):
+        return self.filenames[f_id].split("/")[-2]
+
+    def get_object_name(self, f_id):
+        return self.filenames[f_id].split("/")[-1]
+
+    def get_class_name(self, f_id):
+        return self.metadata[self.get_category(f_id)]["name"]
