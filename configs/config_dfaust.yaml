@@ -1,5 +1,5 @@
 dataset_name: "DFaust"
 dataset_root: 'data/DFaust'
-num_epochs: 5000
+num_epochs: 2500
 manifold_points: 300
 non_manifold_points: 2048

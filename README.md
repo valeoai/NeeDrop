@@ -6,7 +6,7 @@
 
 by: [Alexandre Boulch](https://www.boulch.eu), [Pierre-Alain Langlois](https://imagine.enpc.fr/~langloip/index.html), [Gilles Puy](https://sites.google.com/site/puygilles/) and [Renaud Marlet](http://imagine.enpc.fr/~marletr/)
 
-[Project page](https://www.boulch.eu/2021_3dv_needrop) - Paper - Arxiv - Blog - [Code](https://github.com/valeoai/NeeDrop)
+[Project page](https://www.boulch.eu/2021_3dv_needrop) - Paper - [Arxiv](https://arxiv.org/abs/2111.15207) - Blog - [Code](https://github.com/valeoai/NeeDrop)
 
 ---
 ## Citation
@@ -90,8 +90,6 @@ python eval.py --dataset_name ShapeNet --dataset_root data/ShapeNet/ --predictio
 ---
 ## Pretrained models
 
-*Note*: the proposed pre-trained networks where re-trained, which explains the slight diffrerence with respect to the paper.
-
 ### ShapeNet
 | Model | IoU |
 |---|---|
@@ -101,5 +99,6 @@ python eval.py --dataset_name ShapeNet --dataset_root data/ShapeNet/ --predictio
 ### DFaust
 | Model | Chamfer 5% | Chamfer 50% | Chamfer 95% |
 |---|---|---|---|
-| [NeeDrop DFaust](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/DFaust_None_300_2048_filterNone.zip) | 0.233 * 1e-3 | 0.425  * 1e-3 | 2.265  * 1e-3 |
+| [NeeDrop DFaust](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/DFaust_None_300_2048_filterNone.zip) | 0.269 * 1e-3 | 0.433 * 1e-3 | 1.149 * 1e-3 |
+| [NeeDrop DFaust + Finetuning 0.5](https://github.com/valeoai/NeeDrop/releases/download/v0.0.0/DFaust_FT0.5_300_2048_filterNone.zip)| 0.107 * 1e-3 | 0.175 * 1e-3 | 1.322 * 1e-3 |
 
